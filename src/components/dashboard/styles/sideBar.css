@@ -1,0 +1,38 @@
+.footer {
+  width: 90%;
+  height: 70%;
+  margin: auto;
+  padding: 10%;
+  background-color: #3f3c73;
+  border-radius: 20%;
+}
+
+.bar {
+  height: 90vh;
+  width: 10vw;
+  background-color: #424263;
+  border-radius: 30px;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+  min-width: 150px;
+  padding: 10px;
+  min-height: 600px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.option {
+  height: 50px;
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+  overflow: hidden;
+  background-color: #424263;
+  color: white;
+}
+
+.option:hover {
+  background-color: #2e2e48;
+  cursor: pointer;
+  color: white;
+}

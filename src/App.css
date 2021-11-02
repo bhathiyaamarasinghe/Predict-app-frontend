@@ -1,0 +1,9 @@
+.container {
+  background-color: #ffffff;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  min-width: 800px;
+  margin: auto;
+  padding: 10px;
+}

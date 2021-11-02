@@ -1,0 +1,18 @@
+.resultContainer {
+  padding: 5%;
+}
+
+.resultCard {
+  background-color: rgba(244, 236, 255, 255);
+  margin: 2%;
+  border-radius: 20px;
+  color: rgba(110, 96, 255, 255);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4% 0 4%;
+  align-items: center;
+}
+
+.filesCount {
+  background-color: aliceblue;
+}
