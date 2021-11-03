@@ -52,7 +52,7 @@ const Predict = (props) => {
   }
 
   const drawcoordinates = () => {
-    const r3Info = { x: 100, y: yvalue, w: width, h: height };
+    const r3Info = { x: xvalue, y: yvalue, w: width, h: height };
     drawFillRect(r3Info, { backgroundColor: "yellow" });
 
   };
