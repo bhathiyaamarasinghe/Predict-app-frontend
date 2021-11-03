@@ -28,37 +28,32 @@ const Predict = (props) => {
     canvasEle.height = canvasEle.clientHeight;
     // get context of the canvas
     ctx = canvasEle.getContext("2d");
-
-    async function getValues() {
-      await Axios({
-        method: "get",
-        url: `http://localhost:5002/get-detection`
-      }).then(res => {
-        // console.log(
-        //           res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.h
-        //         );
-        setHeight(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.h);
-        setWidth(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.w);
-        setXvalue(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.x);
-        setYvalue(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.y);
-        console.log(height);
-        console.log(width);
-        console.log(xvalue);
-        console.log(yvalue);
-      });
-    }
     getValues();
     drawcoordinates();
+  }, [yvalue]);
 
-  }, []);
+
+  async function getValues() {
+    await Axios({
+      method: "get",
+      url: `http://localhost:5002/get-detection`
+    }).then(res => {
+      //setting coordinate values  to variable
+      setHeight(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.h);
+      setWidth(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.w);
+      setXvalue(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.x);
+      setYvalue(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.y);
+      console.log(height);
+      console.log(width);
+      console.log(xvalue);
+      console.log(yvalue);
+    });
+
+  }
 
   const drawcoordinates = () => {
-    // coordinates.callApi();
-    // let arr = coordinates.getPolygonData();
-    console.log(height, 'sauihsahs');
-    const r3Info = { x: xvalue, y: yvalue, w: width, h: height };
+    const r3Info = { x: 100, y: yvalue, w: width, h: height };
     drawFillRect(r3Info, { backgroundColor: "yellow" });
-
 
   };
 
