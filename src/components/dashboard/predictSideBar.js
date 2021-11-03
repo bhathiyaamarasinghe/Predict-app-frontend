@@ -42,9 +42,9 @@ const PredictSideBar = (props) => {
           `http://127.0.0.1:5002/get-detection`
         );
         console.log("fetch value data");
-        console.log(
-          responseData.message.documents[0].pages[0].detections[0].rows[0]
-        );
+        // console.log(
+        //   responseData.message.documents[0].pages[0].detections[0].rows[0]
+        // );
         setValues(
           responseData.message.documents[0].pages[0].detections[0].rows[0]
         );
