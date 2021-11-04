@@ -3,7 +3,9 @@ import "./styles/result.css";
 
 const Result = (props) => {
   return (
-    <Container xs="6" sm="6" md="6" lg="6" xl="6">
+    <Container
+    // xs="6" sm="6" md="6" lg="6" xl="6"
+    >
       <div className="resultContainer">
         <h5 style={{ textAlign: "start" }}>Your Results</h5>
 
@@ -13,9 +15,9 @@ const Result = (props) => {
           <div>
             <Col
               className="resultCard"
-              xs="6"
-              sm="6"
-              md="6"
+              xs="12"
+              sm="12"
+              md="12"
               lg="6"
               xl="6"
               style={{ height: "100px" }}
@@ -42,9 +44,9 @@ const Result = (props) => {
             <Col
               className="resultCard"
               style={{ height: "100px" }}
-              xs="6"
-              sm="6"
-              md="6"
+              xs="12"
+              sm="12"
+              md="12"
               lg="6"
               xl="6"
             >

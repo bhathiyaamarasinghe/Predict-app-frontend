@@ -1,9 +1,9 @@
-.container {
-  background-color: #ffffff;
+.app {
+  margin: auto;
   align-content: center;
   align-items: center;
   text-align: center;
-  min-width: 800px;
+  padding: 4.5vh 55px;
+  background-color: #fffafa;
   margin: auto;
-  padding: 10px;
 }

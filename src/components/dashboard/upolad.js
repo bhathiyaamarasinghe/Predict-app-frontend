@@ -3,38 +3,69 @@ import UploadCard from "./shared/uploadCard";
 import { Container, Row, Col, Button } from "reactstrap";
 import PdfUploadImg from "../../assets/images/cloud-computing.png";
 import ConfigUploadImg from "../../assets/images/settings (1).png";
+import { useHistory } from "react-router-dom";
+
+import { uploadPDF, uploadConfig } from "./service";
 
 function Upload() {
+  var PDFs = [];
+  var Configs = [];
+  let history = useHistory();
+
+  const handleStart = () => {
+    PDFs.map((file) => {
+      uploadPDF(file);
+      return file;
+    });
+
+    Configs.map((file) => {
+      uploadConfig(file);
+      return file;
+    });
+
+    PDFs = [];
+    Configs = [];
+
+    history.push("/predict");
+  };
+
+  const addPDF = (file) => {
+    PDFs.push(Object.assign(file));
+  };
+
+  const addConfig = (file) => {
+    Configs.push(Object.assign(file));
+  };
+
   return (
     <Container className="container">
       <Row>
         <Col
-          // xs="6" sm="6" md="6" lg="6" xl="6"
-          style={{ margin: "auto" }}
+          style={{
+            margin: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "10vh",
+          }}
         >
           <UploadCard
+            id="dragPDF"
             title="Drag and Drop PDFs"
             imgPath={PdfUploadImg}
             altText="pdf upload image"
             accept={"application/pdf"}
+            callBack={addPDF}
           />
-          <div style={{ height: "3vh" }}></div>
           <UploadCard
+            id="dragConfig"
             title="Drag and Drop Config Files"
             imgPath={ConfigUploadImg}
             altText="config upload image"
             accept={""}
+            callBack={addConfig}
           />
-        </Col>
-        <Col
-          // xs="3"
-          // sm="3"
-          // md="3"
-          // lg="3"
-          // xl="3"
-          style={{ textAlign: "center", alignItems: "end" }}
-        >
-          <div style={{ height: "90%" }}></div>
           <Button
             rounded
             color="primary"
@@ -42,7 +73,9 @@ function Upload() {
               width: "100px",
               borderRadius: "20px",
               boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+              backgroundColor: "#786ef8",
             }}
+            onClick={handleStart}
           >
             Start
           </Button>{" "}

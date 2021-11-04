@@ -1,18 +1,15 @@
 import { Link } from "react-router-dom";
-
 import { Container, Row, Media } from "reactstrap";
 import "../styles/sideBar.css";
 import PersonImg from "../../../assets/images/man.png";
 
 const SideBar = (props) => {
   return (
-    <Container>
+    <div>
       {/* <Collapse> */}
       <Row className="bar">
         {/* title */}
-        <div style={{ margin: "0", padding: "10%" }}>
-          <i class="fab fa-500px"></i> Teams.co
-        </div>
+        <div style={{ margin: "0", padding: "10%" }}>Teams.co</div>
 
         {/* profile */}
         <div>
@@ -29,9 +26,15 @@ const SideBar = (props) => {
 
         {/* options */}
         <div>
-          <div className="option"> Upload </div>
-          <div className="option"> <Link style={{textDecoration:'none' , color:'inherit'}} to="/predict">Predict</Link></div>
-          <div className="option"> Results</div>
+          <Link to="/upload" style={{ textDecoration: "none" }}>
+            <div className="option"> Upload </div>
+          </Link>
+          <Link to="/predict" style={{ textDecoration: "none" }}>
+            <div className="option"> Predict</div>
+          </Link>
+          <Link to="/results" style={{ textDecoration: "none" }}>
+            <div className="option"> Results</div>
+          </Link>
         </div>
 
         {/* footer */}
@@ -49,7 +52,7 @@ const SideBar = (props) => {
         </div>
       </Row>
       {/* </Collapse> */}
-    </Container>
+    </div>
   );
 };
 

@@ -9,7 +9,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Axios from "axios";
 import { Component } from "react/cjs/react.production.min";
-import { style } from "@mui/system";
+import { positions, style } from "@mui/system";
 
 // initialize the canvas context
 const Predict = (props) => {
@@ -25,43 +25,64 @@ const Predict = (props) => {
     // dynamically assign the width and height to canvas
     const canvasEle = canvas.current;
     canvasEle.width = canvasEle.clientWidth;
-    canvasEle.height = canvasEle.clientHeight;
     // get context of the canvas
     ctx = canvasEle.getContext("2d");
+
+    const image = new Image();
+     image.src =
+       "https://previews.123rf.com/images/rawpixel/rawpixel1707/rawpixel170751985/82353993-medical-patient-report-form-record-history-information-word.jpg";
+
+    canvasEle.height = image.height;
+
+    image.onload = () => {
+      ctx.drawImage(image, 0, 0, canvasEle.width, canvasEle.height);
+    };
+
     getValues();
     drawcoordinates();
   }, [yvalue]);
 
-
   async function getValues() {
     await Axios({
       method: "get",
-      url: `http://localhost:5002/get-detection`
-    }).then(res => {
+      url: `http://localhost:5002/get-detection`,
+    }).then((res) => {
       //setting coordinate values  to variable
-      setHeight(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.h);
-      setWidth(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.w);
-      setXvalue(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.x);
-      setYvalue(res.data.message.documents[0].pages[0].detections[0].boundingPoly.vertices.y);
+      setHeight(
+        res.data.message.documents[0].pages[0].detections[0].boundingPoly
+          .vertices.h
+      );
+      setWidth(
+        res.data.message.documents[0].pages[0].detections[0].boundingPoly
+          .vertices.w
+      );
+      setXvalue(
+        res.data.message.documents[0].pages[0].detections[0].boundingPoly
+          .vertices.x
+      );
+      setYvalue(
+        res.data.message.documents[0].pages[0].detections[0].boundingPoly
+          .vertices.y
+      );
       console.log(height);
       console.log(width);
       console.log(xvalue);
       console.log(yvalue);
     });
-
   }
 
   const drawcoordinates = () => {
     //change the x value with 100 the shape in shown
-    const r3Info = { x: xvalue, y: yvalue, w: width, h: height };
-    drawFillRect(r3Info, { backgroundColor: "yellow" });
-
+    // const r3Info = { x: xvalue, y: yvalue, w: width, h: height };
+    const r3Info = { x: 100, y: 100, w: width, h: height };
+    drawFillRect(r3Info, { backgroundColor: "yellow"});
   };
 
   // draw rectangle with background
   const drawFillRect = (info, style = {}) => {
     const { x, y, w, h } = info;
     const { backgroundColor = "" } = style;
+
 
     ctx.beginPath();
     ctx.fillStyle = backgroundColor;
@@ -76,39 +97,23 @@ const Predict = (props) => {
   }));
 
   return (
-    <Box sx={{ flexGrow: 1, paddingTop: 10 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        <Grid item xs={2.2} >
-          <Item >
-            <SideBar />
-          </Item>
-        </Grid>
-        <Grid item xs={6.8}>
-          <Item>
-            {" "}
-            <div className="App">
-              <canvas
-                style={{
-                  backgroundImage:
-                    "url(" + "https://previews.123rf.com/images/rawpixel/rawpixel1707/rawpixel170751985/82353993-medical-patient-report-form-record-history-information-word.jpg" + ")",
-                  objectFit: "cover",
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-                id="canvas"
-                ref={canvas}
-              >
-              </canvas>
-            </div>
-          </Item>
-        </Grid>
-        <Grid item xs={3}>
-          <Item>
-            {" "}
-            <RightDashBoard />
-          </Item>
-        </Grid>
+      <Grid item xs={7.8}>
+        <Item>
+          {" "}
+          <div>
+
+            <canvas id="canvas" ref={canvas}></canvas>
+          </div>
+        </Item>
+      </Grid>
+      <Grid item xs={4.2}>
+        <Item>
+          {" "}
+          <RightDashBoard />
+        </Item>
+      </Grid>
       </Grid>
     </Box>
   );

@@ -9,16 +9,17 @@
 
 .bar {
   height: 90vh;
-  width: 10vw;
+  min-height: 600px;
+  min-width: 130px;
+  width: 5%;
   background-color: #424263;
   border-radius: 30px;
   color: white;
   text-align: center;
   overflow: hidden;
-  min-width: 150px;
-  padding: 10px;
-  min-height: 600px;
+
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
 }
 
 .option {

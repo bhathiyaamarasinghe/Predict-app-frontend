@@ -1,26 +1,37 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { Button } from "reactstrap";
 import "../styles/uploadCard.css";
 import Dropzone from "react-dropzone";
-import { uploadPDF } from "../service";
 
 const UploadCard = (props) => {
-  const [files, setFiles] = useState([]);
-
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.map((file) => {
       const fd = new FormData();
       fd.append("file", file, file.name);
-      uploadPDF(fd);
+      props.callBack(fd);
       return file;
     });
   }, []);
 
+  const enterDrag = (e) => {
+    console.log(e.id);
+    if (e.id == "dragPDF") {
+      e.style.border = "10px red solid";
+    } else if (e.id == "dragConfig") {
+      e.style.border = "10px red solid";
+    }
+  };
+
   return (
     <div>
-      <div className="cardFrame">
+      <div
+        id={props.id}
+        className="cardFrame"
+        onDragOver={(e) => enterDrag(e.target)}
+        onDragEnter={(e) => enterDrag(e.target)}
+      >
         <Dropzone onDrop={onDrop} accept={props.accept}>
-          {({ getRootProps, getInputProps }) => (
+          {({ getRootProps, getInputProps, isDragActive }) => (
             <section>
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
@@ -31,11 +42,11 @@ const UploadCard = (props) => {
                 />
                 <h5>{props.title}</h5>
                 <Button
-                  color="primary"
                   style={{
                     width: "100px",
                     borderRadius: "20px",
                     boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                    backgroundColor: "#373360",
                   }}
                 >
                   Upload
