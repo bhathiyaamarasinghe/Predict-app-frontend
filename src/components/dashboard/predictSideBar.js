@@ -35,14 +35,24 @@ const useStyles = makeStyles({
   },
   cell: {
     fontSize: "11px",
-    padding: "10px 5px"
+    padding: "10px 5px",
+    textAlign: "center"
   },
   headingCell: {
     color: "#0093ff",
     fontSize: "11px",
     padding: "10px 5px",
-    fontWeight: "700"
-  }
+    fontWeight: "700",
+    textAlign: "center"
+  },
+  cellInput: {
+    border: "0",
+    textAlign: "center",
+    minWidth: "20px",
+    maxWidth: "50px",
+    padding: "0"
+  },
+
 });
 
 const PredictSideBar = (props) => {
@@ -51,7 +61,7 @@ const PredictSideBar = (props) => {
   const [values, setValues] = useState([]);
   const [option, setOption] = useState(10);
   const [viewType, setViewType] = useState(10);
-
+  const [colomnValue, setColomnValue] = useState([]);
   const handleChange = (event) => {
     setOption(event.target.value);
     //console.log(event.target.value);
@@ -73,7 +83,15 @@ const PredictSideBar = (props) => {
       } catch (err) { }
     };
     fetchValueData();
+    console.log(colomnValue)
   }, []);
+
+  const handleInputChange = (e) => {
+    let currentInput = e.currentTarget.value;
+
+    let editValues = [...this.values];
+    editValues.find()
+  }
 
 
   const viewData = (viewType, values) => {
@@ -101,31 +119,31 @@ const PredictSideBar = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell className={classes.headingCell} align="right">column</TableCell>
-                <TableCell className={classes.headingCell} align="right"><Checkbox /></TableCell>
+                <TableCell className={classes.headingCell} style={{ padding: "0", width: "5px" }} align="right"><Checkbox style={{ padding: "0" }} /></TableCell>
                 <TableCell className={classes.headingCell} align="right">type</TableCell>
                 <TableCell className={classes.headingCell} align="right">value</TableCell>
+
               </TableRow>
             </TableHead>
             <TableBody>
-              {values.map((item) => (
+              {values.map((item, i) => (
                 <TableRow
-                  key={item}
+                  key={i}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+
                 >
-                  <TableCell className={classes.cell} align="right">{item.column}</TableCell>
-                  <TableCell className={classes.cell} align="right"><Checkbox checked={item.selected} /></TableCell>
-                  <TableCell className={classes.cell} align="right">{item.type}</TableCell>
-                  <TableCell className={classes.cell} align="right">{item.value}</TableCell>
+                  {/* {{ setColomnValue: item.column }} */}
+
+                  <TableCell className={classes.cell} align="right"><input className={classes.cellInput} type="text" value={item.column} onChnage={handleInputChange} /></TableCell>
+                  <TableCell className={classes.cell} style={{ width: "5px", padding: "0" }} align="right"><Checkbox style={{ padding: "0" }} checked={item.selected} /></TableCell>
+                  <TableCell className={classes.cell} align="right"><input className={classes.cellInput} type="text" value={item.type} /></TableCell>
+                  <TableCell className={classes.cell} align="right"><input className={classes.cellInput} type="text" value={item.value} /></TableCell>
+
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
-
-
-
-
-
       )
 
     } else if (viewType === 20) {
@@ -138,6 +156,10 @@ const PredictSideBar = (props) => {
       )
     }
 
+  }
+
+  const handleSave = () => {
+    console.log("change data")
   }
 
   return (
@@ -225,6 +247,7 @@ const PredictSideBar = (props) => {
                   viewData(viewType, values)
                 }
 
+
                 {/* <TextField
                     id="outlined-basic"
                     label="Outlined"
@@ -267,10 +290,17 @@ const PredictSideBar = (props) => {
                   />
                 </Grid> */}
               </Grid>
+
             </List>
             {/* </Paper> */}
+
           </CardContent>
-          <CardActions></CardActions>
+          <CardActions>
+
+          </CardActions>
+        </Card>
+        <Card style={{ padding: "10px 0px" }}>
+          <Button variant="contained">Submit</Button>
         </Card>
       </Grid>
     </Grid>
