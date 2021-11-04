@@ -52,6 +52,7 @@ const Predict = (props) => {
   }
 
   const drawcoordinates = () => {
+    //change the x value with 100 the shape in shown
     const r3Info = { x: xvalue, y: yvalue, w: width, h: height };
     drawFillRect(r3Info, { backgroundColor: "yellow" });
 
